@@ -1,0 +1,46 @@
+/* =====================================================================
+   Identidade visual do PizzaGest (mesmas cores e tipografia dos slides)
+   ===================================================================== */
+@font-face { font-family: "Lato"; font-weight: 400; font-style: normal; font-display: swap; src: url("../assets/fonts/Lato-Regular.woff") format("woff"); }
+@font-face { font-family: "Lato"; font-weight: 400; font-style: italic; font-display: swap; src: url("../assets/fonts/Lato-Italic.woff") format("woff"); }
+@font-face { font-family: "Lato"; font-weight: 700; font-style: normal; font-display: swap; src: url("../assets/fonts/Lato-Bold.woff") format("woff"); }
+@font-face { font-family: "Lato"; font-weight: 900; font-style: normal; font-display: swap; src: url("../assets/fonts/Lato-Black.woff") format("woff"); }
+
+:root {
+  /* Paleta dos slides */
+  --pg-red: #D62828;          /* vermelho principal (Pizza, botões, destaques) */
+  --pg-red-hover: #BC1F1F;
+  --pg-red-rgb: 214, 40, 40;
+  --pg-orange: #E85D04;       /* laranja dos rótulos (kicker) e da camada de negócio */
+  --pg-ink: #1F2328;          /* texto principal (Gest, títulos) */
+  --pg-muted: #5B6470;        /* texto secundário */
+  --pg-slate: #374151;        /* azul-ardósia (camada de dados) */
+  --pg-surface: #F4F4F5;      /* cartões cinza-claro */
+  --pg-peach: #FFF1E6;        /* fundo pêssego (círculo da capa, notas) */
+  --pg-pink: #FDECEA;         /* círculo dos ícones */
+  --pg-border: #E3E3E3;
+  --pg-white: #FFFFFF;
+
+  --pg-radius: 10px;
+  --pg-radius-sm: 8px;
+  --pg-font: "Lato", "Carlito", "Calibri", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --pg-mono: "Liberation Mono", "Cousine", "Courier New", monospace;
+  --pg-shadow: 0 1px 2px rgba(31, 35, 40, .04), 0 4px 16px rgba(31, 35, 40, .06);
+
+  /* Bootstrap usando a paleta do PizzaGest */
+  --bs-body-font-family: var(--pg-font);
+  --bs-body-color: var(--pg-ink);
+  --bs-body-bg: var(--pg-white);
+  --bs-secondary-color: var(--pg-muted);
+  --bs-border-color: var(--pg-border);
+  --bs-border-radius: var(--pg-radius-sm);
+  --bs-border-radius-lg: var(--pg-radius);
+  --bs-primary: var(--pg-red);
+  --bs-primary-rgb: var(--pg-red-rgb);
+  --bs-danger: var(--pg-red);
+  --bs-danger-rgb: var(--pg-red-rgb);
+  --bs-link-color: var(--pg-red);
+  --bs-link-color-rgb: var(--pg-red-rgb);
+  --bs-link-hover-color: var(--pg-red-hover);
+  --bs-focus-ring-color: rgba(var(--pg-red-rgb), .25);
+}

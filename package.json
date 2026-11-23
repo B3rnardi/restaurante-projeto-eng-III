@@ -1,0 +1,26 @@
+{
+  "name": "pizzagest",
+  "private": true,
+  "version": "1.0.0",
+  "description": "PizzaGest – Sistema de Gestão de Pedidos para Delivery Local (front-end em TypeScript + API local em Python)",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.server.json && tsc -p tsconfig.json",
+    "start": "npm run build && node build/server/server.js",
+    "start:web": "npm run build && node build/server/server.js --sem-api",
+    "watch": "tsc -p tsconfig.json --watch",
+    "typecheck": "tsc -p tsconfig.server.json --noEmit && tsc -p tsconfig.json --noEmit",
+    "test:backend": "cd backend && python -m unittest -v test_pizzagest"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

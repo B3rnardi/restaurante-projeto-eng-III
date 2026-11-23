@@ -1,0 +1,15 @@
+{
+  // Servidor Node que entrega o front-end e repassa /api para o back-end Python
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "rootDir": "frontend/server",
+    "outDir": "build/server",
+    "strict": true,
+    "skipLibCheck": true,
+    "types": ["node"]
+  },
+  "include": ["frontend/server/**/*.ts"]
+}

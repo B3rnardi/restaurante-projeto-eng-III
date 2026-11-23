@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#D62828">
+  <title>PizzaGest</title>
+  <meta name="description" content="PizzaGest – Sistema de Gestão de Pedidos para Delivery Local">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+
+  <!-- Bootstrap e ícones (instalados pelo npm, servidos pelo servidor Node em /vendor) -->
+  <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/vendor/bootstrap-icons/bootstrap-icons.min.css">
+
+  <!-- Identidade visual dos slides (cores e tipografia) + estilos das telas -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+  <div id="app">
+    <div class="pg-boot"><div class="spinner-border text-danger" role="status"><span class="visually-hidden">Carregando...</span></div></div>
+  </div>
+  <div id="toasts" class="toast-container position-fixed p-3 pg-toasts" aria-live="polite"></div>
+
+  <noscript>O PizzaGest precisa de JavaScript habilitado.</noscript>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>
