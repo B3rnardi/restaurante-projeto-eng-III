@@ -10,7 +10,7 @@ export function cartaoPedido(p: Pedido, aberto = false): string {
       <span class="pg-order-num">#${p.numero}</span>
       <span class="flex-grow-1 min-w-0 text-start">
         <span class="d-block fw-bold text-truncate">${p.cliente}</span>
-        <span class="d-block small text-secondary">${formatarDataHora(p.dataHora)} · ${plural(qtd, "item", "itens")}</span>
+        <span class="d-block small text-secondary">${formatarDataHora(p.dataHora)} · ${plural(qtd, "item", "itens")}${p.telefone ? raw(html` · <i class="bi bi-telephone"></i> ${p.telefone}`) : ""}</span>
       </span>
       <span class="pg-status"><i class="bi bi-check-circle-fill"></i> ${p.status === "FECHADO" ? "Fechado" : "Aberto"}</span>
       <span class="pg-order-total">${formatarMoeda(p.total)}</span>

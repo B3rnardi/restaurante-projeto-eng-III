@@ -35,6 +35,7 @@ export interface ItemPedido {
 export interface Pedido {
   numero: number;
   cliente: string;
+  telefone: string;
   dataHora: string;
   status: "ABERTO" | "FECHADO";
   estrategia: { id: EstrategiaId; nome: string };
@@ -55,6 +56,7 @@ export type ItemNovoPedido =
 
 export interface NovoPedido {
   cliente: string;
+  telefone?: string;
   estrategia: EstrategiaId;
   itens: ItemNovoPedido[];
 }

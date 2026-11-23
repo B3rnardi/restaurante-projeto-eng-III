@@ -77,6 +77,7 @@ def pedido_json(pedido) -> dict:
     return {
         "numero": pedido.numero,
         "cliente": pedido.cliente,
+        "telefone": pedido.telefone,
         "dataHora": pedido.data_hora.isoformat(timespec="seconds"),
         "status": pedido.status,
         "estrategia": {"id": eid, "nome": ESTRATEGIAS[eid]["nome"]},
@@ -195,7 +196,12 @@ def rota_registrar_pedido(corpo, _sessao):
         else:
             resolvidos.append(("INTEIRO", buscar_produto(item.get("produto")), None, quantidade))
 
-    pedido = Pedido(str(corpo.get("cliente", "")), criar_estrategia(corpo.get("estrategia")))
+    pedido = Pedido(
+        str(corpo.get("cliente", "")),
+        criar_estrategia(corpo.get("estrategia")),
+        str(corpo.get("telefone", "")),
+    )
+    
     for tipo, produto, sabor2, quantidade in resolvidos:
         if tipo == "MEIO":
             pedido.adicionar_pizza_meio_a_meio(produto, sabor2, quantidade)

@@ -27,7 +27,7 @@ export async function telaPedidos(raiz: HTMLElement): Promise<void> {
     <div class="pg-toolbar">
       <div class="pg-search">
         <i class="bi bi-search"></i>
-        <input id="busca-pedido" type="search" class="form-control" placeholder="Buscar por cliente ou número..." aria-label="Buscar pedido">
+        <input id="busca-pedido" type="search" class="form-control" placeholder="Buscar por cliente, telefone ou número..." aria-label="Buscar pedido">
       </div>
       <div class="small text-secondary" id="resumo"></div>
     </div>
@@ -36,11 +36,22 @@ export async function telaPedidos(raiz: HTMLElement): Promise<void> {
   const lista = $("#lista", raiz);
   function render(termo: string): void {
     const t = normalizar(termo).replace(/^#/, "");
-    const filtrados = pedidos.filter((p) => !t || normalizar(p.cliente).includes(t) || String(p.numero) === t);
+    const digitos = termo.replace(/\D/g, "");
+    const filtrados = pedidos.filter((p) => {
+      if (!t) return true;
+      const tel = p.telefone || "";
+      const telDigitos = tel.replace(/\D/g, "");
+      return (
+        normalizar(p.cliente).includes(t) ||
+        String(p.numero) === t ||
+        normalizar(tel).includes(t) ||
+        (digitos.length > 0 && telDigitos.includes(digitos))
+      );
+    });
     $("#resumo", raiz).textContent = `${filtrados.length} de ${pedidos.length}`;
     lista.innerHTML = filtrados.length
       ? filtrados.map((p, i) => cartaoPedido(p, i === 0 && !t)).join("")
-      : estadoVazio("bi-search", "Nenhum pedido encontrado", "Confira o nome do cliente ou o número.");
+      : estadoVazio("bi-search", "Nenhum pedido encontrado", "Confira o nome do cliente, o telefone ou o número.");
   }
   $<HTMLInputElement>("#busca-pedido", raiz).addEventListener("input", (e) => render((e.target as HTMLInputElement).value));
   render("");

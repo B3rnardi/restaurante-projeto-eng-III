@@ -134,11 +134,12 @@ class ItemPedido:
 
 
 class Pedido:
-    def __init__(self, cliente: str, estrategia_preco: CalculoPrecoStrategy = None):
+    def __init__(self, cliente: str, estrategia_preco: CalculoPrecoStrategy = None, telefone: str = ""):
         if not cliente or not cliente.strip():
             raise ValueError("O nome do cliente é obrigatório.")
         self.numero = BaseDadosPizzariaSingleton.get_instance().gerar_numero_pedido()
         self.cliente = cliente.strip()
+        self.telefone = telefone.strip() if telefone else ""
         self.data_hora = datetime.now()
         self.itens: list[ItemPedido] = []
         self.status = "ABERTO"

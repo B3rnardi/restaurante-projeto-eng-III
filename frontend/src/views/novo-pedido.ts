@@ -1,7 +1,7 @@
 /**
- * Tela "Novo pedido" (casos de uso: registrar pedido, pizza meio a meio, fechar pedido).
- * O carrinho é montado no navegador; ao fechar, o back-end cria o Pedido, aplica a
- * estratégia de preço escolhida, fecha e grava no Singleton.
+- Tela "Novo pedido" (casos de uso: registrar pedido, pizza meio a meio, fechar pedido).
+- O carrinho é montado no navegador; ao fechar, o back-end cria o Pedido, aplica a
+- estratégia de preço escolhida, fecha e grava no Singleton.
  */
 import { api } from "../services/api.js";
 import { carrinho } from "../app/cart.js";
@@ -70,6 +70,11 @@ export async function telaNovoPedido(raiz: HTMLElement) {
           </div>
 
           <div class="mb-3">
+            <label for="telefone" class="form-label">Telefone</label>
+            <input id="telefone" type="tel" class="form-control" placeholder="(11) 99999-9999" autocomplete="off" maxlength="20">
+          </div>
+
+          <div class="mb-3">
             <div class="form-label d-flex justify-content-between">
               <span>Preço do meio a meio</span>
               <span class="spinner-border spinner-border-sm text-danger" id="recalc" hidden></span>
@@ -103,6 +108,7 @@ export async function telaNovoPedido(raiz: HTMLElement) {
   // No celular o carrinho fica abaixo do cardápio: a barra fixa leva até ele.
   $("#ver-pedido", raiz).addEventListener("click", () => $("#carrinho", raiz).scrollIntoView({ behavior: "smooth", block: "start" }));
   const campoCliente = $<HTMLInputElement>("#cliente", raiz);
+  const campoTelefone = $<HTMLInputElement>("#telefone", raiz);
   const botaoFechar = $<HTMLButtonElement>("#fechar", raiz);
 
   // ------------------------------------------------------------ cardápio
@@ -388,9 +394,13 @@ export async function telaNovoPedido(raiz: HTMLElement) {
     botaoFechar.disabled = true;
     botaoFechar.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span>Fechando...`;
     try {
-      const pedido = await api.registrarPedido(carrinho.paraEnvio());
+      const pedido = await api.registrarPedido({
+        ...carrinho.paraEnvio(),
+        telefone: campoTelefone.value.trim(),
+      });
       carrinho.limpar();
       campoCliente.value = "";
+      campoTelefone.value = "";
       mostrarRecibo(pedido);
     } catch (erro) {
       toastErro(erro);
@@ -406,7 +416,7 @@ export async function telaNovoPedido(raiz: HTMLElement) {
         <div class="pg-success-icon mb-3"><i class="bi bi-check-lg"></i></div>
         <div class="pg-kicker">Pedido fechado</div>
         <h2 class="h3 fw-bold mb-1">Pedido #${pedido.numero}</h2>
-        <p class="text-secondary mb-4">${pedido.cliente} · regra ${pedido.estrategia.nome.toLowerCase()}</p>
+        <p class="text-secondary mb-4">${pedido.cliente}${pedido.telefone ? ` · ${pedido.telefone}` : ""} · regra ${pedido.estrategia.nome.toLowerCase()}</p>
         <ul class="pg-receipt text-start">
           ${pedido.itens.map((i) =>
             raw(html`<li><span>${i.quantidade}× ${i.descricao}</span><span>${formatarMoeda(i.subtotal)}</span></li>`),
